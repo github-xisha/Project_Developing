@@ -71,18 +71,25 @@ void MyTask::response()
 	else
 	{
 		istringstream ist;
-        MyResult result = _resultQue.top();
-        
-        _resultQue.pop();
-        MyResult result1 = _resultQue.top();
-        string result3("-----");
-        string result2=result._word+result3+result1._word;
-        _conn->sendInLoop(result2);
+       // MyResult result = _resultQue.top();
+       // _resultQue.pop();
+       // MyResult result1 = _resultQue.top();
+
+        MyResult result[3];
+        for(int i=0;i<3;++i)
+        {
+            result[i] = _resultQue.top();
+            _resultQue.pop();
+        }
+       // string enter("\n");
+        string line("---");
+        string sendData=result[0]._word+line+result[1]._word+line+result[2]._word;
+        _conn->sendInLoop(sendData);
         
         //_conn->sendInLoop(result._word);//这里只返回了一个候选词
 
 		Cache & cache = CacheManager::getCache(wd::str2int(wd::current_thread::threadName));
-		cache.addElement(_queryWord, result._word);//在缓存中添加新的查询结果
+		cache.addElement(_queryWord, result[0]._word);//在缓存中添加新的查询结果
 		cout << "> respone(): add Cache" << endl;
 	}
 	cout << "> reponse client" << endl;
