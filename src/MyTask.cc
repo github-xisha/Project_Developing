@@ -72,14 +72,23 @@ void MyTask::response()
 	{
 		istringstream ist;
        // MyResult result = _resultQue.top();
-       // _resultQue.pop();
+        // _resultQue.pop();
        // MyResult result1 = _resultQue.top();
 
         MyResult result[3];
+        //std::cout<<"优先级队列元素个数："<<_resultQue.size()<<std::endl;
         for(int i=0;i<3;++i)
         {
             result[i] = _resultQue.top();
             _resultQue.pop();
+            if(_resultQue.empty())
+            {
+                for(int j=i;j<3;++j)
+                {
+                    result[j]=result[0];
+                }
+                break;
+            }
         }
         string line("---");
         string sendData=result[0]._word+line+result[1]._word+line+result[2]._word;
