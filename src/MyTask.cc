@@ -95,9 +95,9 @@ void MyTask::response()
         _conn->sendInLoop(sendData);//返回3个候选词
         //_conn->sendInLoop(result._word);//这里只返回了一个候选词
 
-		Cache & cache = CacheManager::getCache(wd::str2int(wd::current_thread::threadName));
-		//cache.addElement(_queryWord, result[0]._word);//在缓存中添加新的查询结果
-		cache.addElement(_queryWord,sendData); //在缓存中添加3个查询结果
+	Cache & cache = CacheManager::getCache(wd::str2int(wd::current_thread::threadName));
+	//cache.addElement(_queryWord, result[0]._word);//在缓存中添加新的查询结果
+	cache.addElement(_queryWord,sendData); //在缓存中添加3个查询结果
         cout << "> respone(): add Cache" << endl;
 	}
 	cout << "> reponse client" << endl;
