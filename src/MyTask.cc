@@ -81,7 +81,7 @@ void MyTask::response()
         {
             result[i] = _resultQue.top();
             _resultQue.pop();
-            if(_resultQue.empty())
+            if(_resultQue.empty())//每次从队列弹出一个元素后，需判断队列是否为空
             {
                 for(int j=i;j<3;++j)
                 {
